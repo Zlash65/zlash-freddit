@@ -1,23 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
 
+import Login from './components/login';
+import { useEffect } from 'react';
+import { gapi } from 'gapi-script';
+
+const client_id = "1039181549088-lf6dttv3hjv0jmj6pkonhu8oceic3731.apps.googleusercontent.com";
+
 function App() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        client_id: client_id,
+        scope: ""
+      })
+    }
+
+    gapi.load("client:auth2", start);
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Login/>
     </div>
   );
 }
